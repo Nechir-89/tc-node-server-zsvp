@@ -5,11 +5,15 @@ import { User } from "../models/User";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret";
 
-export const login = async (
-  credentials: Pick<User, "username" | "password">
-): Promise<string | null> => {
+export async function login(
+  // credentials: Pick<User, "username" | "password">
+  { username, password }: { username: string; password: string }
+): Promise<{
+  token: string;
+  user: User;
+} | null> {
   const user: User & { error?: string } = await userService.getUserByUsername(
-    credentials.username as string
+    username
   );
   if (!user) {
     return null;
@@ -24,7 +28,7 @@ export const login = async (
   }
 
   const isPasswordValid = await bcrypt.compare(
-    credentials.password as string,
+    password as string,
     user.hashed_password as string
   );
 
@@ -36,5 +40,5 @@ export const login = async (
     expiresIn: "1h",
   });
 
-  return token;
-};
+  return { token, user };
+}
