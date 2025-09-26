@@ -16,14 +16,14 @@ export const getAllNews = async (req: Request, res: Response) => {
 };
 
 export const getNewsById: RequestHandler<
-  never,
+  {id: number},
   Response,
-  { id: number },
+  Request,
   never
 > = async (req, res: Response) => {
   try {
     const news: News & { error?: string } = await newsService.getNewsById(
-      Number(req.body.id)
+      Number(req.params.id)
     );
     if (news && news.error) {
       res.status(500).json({ message: news.error });

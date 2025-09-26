@@ -5,6 +5,7 @@ import cors from "cors";
 import userRoutes from "./routes/userRoutes";
 import authRoutes from "./routes/authRoutes";
 import newsRoutes from "./routes/newsRoutes";
+import imagesRoutes from "./routes/imagesRoutes";
 import path from "path";
 
 dotenv.config({ path: path.join(process.cwd(), ".env") });
@@ -24,6 +25,7 @@ app.use("/users", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use("/news", newsRoutes);
+app.use("/images", imagesRoutes);
 
 app.use(
   (

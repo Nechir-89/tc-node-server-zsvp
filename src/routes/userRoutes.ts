@@ -5,6 +5,7 @@ import upload from "../middleware/upload";
 
 const router = Router();
 
+// only authenticated users can access users
 router.get("/", authenticateToken, userController.getAllUsers);
 router.get("/:id", authenticateToken, userController.getUserById);
 router.post("/", authenticateToken, userController.createUser);

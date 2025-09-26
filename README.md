@@ -4,30 +4,41 @@ This is a REST API built with Node.js, Express, and TypeScript, connected to a P
 
 ## Features
 
--   User registration and login
--   CRUD operations for users
--   Protected routes using JWT
--   File uploads for authenticated users
--   CORS enabled
+*   User registration and login
+*   CRUD operations for users
+*   Protected routes using JWT
+*   File uploads for authenticated users
+*   CORS enabled
+
+### Permissions and roles
+
+* Reading news is public
+* Writing, Updating, and Deleting news, is only for authenticated users
+* All user CRUD APIs are anly for authenticated users
+* Reading images is public but Adding, Updating, or Deleting them is only for authenticated users
 
 ## Prerequisites
 
--   Node.js
--   npm
--   PostgreSQL
+*   Node.js
+*   npm
+*   PostgreSQL
 
 ## Getting Started
 
 1.  **Clone the repository:**
 
-    ```bash
+    
+
+```bash
     git clone https://github.com/your-username/your-repo-name.git
     cd your-repo-name
     ```
 
 2.  **Install dependencies:**
 
-    ```bash
+    
+
+```bash
     npm install
     ```
 
@@ -35,30 +46,34 @@ This is a REST API built with Node.js, Express, and TypeScript, connected to a P
 
     -   Install PostgreSQL if you haven't already.
     -   Open a PostgreSQL terminal and run the following commands to create a new database and user:
+        
 
-        ```sql
+```sql
         CREATE DATABASE mydatabase;
         CREATE USER myuser WITH ENCRYPTED PASSWORD 'mypassword';
         GRANT ALL PRIVILEGES ON DATABASE mydatabase TO myuser;
         ```
 
     -   Connect to the new database:
+        
 
-        ```bash
+```bash
         psql -U myuser -d mydatabase
         ```
 
     -   Run the `init.sql` script to create the `users` table:
+        
 
-        ```bash
+```bash
         \i db/init.sql
         ```
 
 4.  **Set up environment variables:**
-
     Create a `.env` file in the root of the project and add the following variables:
 
-    ```
+    
+
+```
     DB_HOST=localhost
     DB_PORT=5432
     DB_NAME=mydatabase
@@ -69,26 +84,28 @@ This is a REST API built with Node.js, Express, and TypeScript, connected to a P
 
 5.  **Run the application:**
 
-    ```bash
+    
+
+```bash
     npm run dev
     ```
 
-    The server will start on `http://localhost:3000`.
+    The server will start on `http://localhost:3000` .
 
 ## API Endpoints
 
 ### Auth
 
--   `POST /auth/login`: Login a user and get a JWT token.
+*   `POST /auth/login`: Login a user and get a JWT token.
 
 ### Users
 
--   `GET /users`: Get all users.
--   `GET /users/:id`: Get a user by ID.
--   `POST /users`: Create a new user (requires authentication).
--   `PUT /users/:id`: Update a user (requires authentication).
--   `DELETE /users/:id`: Delete a user (requires authentication).
--   `POST /users/upload`: Upload a file (requires authentication).
+*   `GET /users`: Get all users.
+*   `GET /users/:id`: Get a user by ID.
+*   `POST /users`: Create a new user (requires authentication).
+*   `PUT /users/:id`: Update a user (requires authentication).
+*   `DELETE /users/:id`: Delete a user (requires authentication).
+*   `POST /users/upload`: Upload a file (requires authentication).
 
 ## File Uploads
 

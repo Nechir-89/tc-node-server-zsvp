@@ -4,8 +4,11 @@ import { authenticateToken } from "../middleware/auth";
 
 const router = Router();
 
-router.get("/", authenticateToken, newsController.getAllNews);
-router.get("/:id", authenticateToken, newsController.getNewsById);
+// any (public)
+router.get("/", newsController.getAllNews); 
+router.get("/:id", newsController.getNewsById);
+
+// only authenticated users
 router.post("/", authenticateToken, newsController.createNews);
 router.put("/", authenticateToken, newsController.updateNews);
 router.delete("/", authenticateToken, newsController.deleteNews);

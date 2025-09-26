@@ -5,7 +5,7 @@ import { User } from "../models/User";
 export const getAllNews = async () => {
   console.log("⏳ getting all news");
   try {
-    const req = await db.any("SELECT * FROM news");
+    const req = await db.any("SELECT * FROM news ORDER BY published_date DESC");
     console.log("✅ all news fetched");
     return req;
   } catch (err: any) {
