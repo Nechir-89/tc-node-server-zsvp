@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as imagesController from "../controllers/imagesController";
 import { authenticateToken } from "../middleware/auth";
+import upload from "../middleware/upload";
 
 const router = Router();
 
@@ -11,5 +12,10 @@ router.post("/content_id", imagesController.getImagesByContentId);
 
 // only authenticated users
 router.post("/", authenticateToken, imagesController.addImage);
+
+// images
+
+// router.post("/uploads", authenticateToken, upload.)
+
 
 export default router;

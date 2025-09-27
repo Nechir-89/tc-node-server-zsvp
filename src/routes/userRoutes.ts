@@ -11,10 +11,11 @@ router.get("/:id", authenticateToken, userController.getUserById);
 router.post("/", authenticateToken, userController.createUser);
 router.put("/", authenticateToken, userController.updateUser);
 router.delete("/", authenticateToken, userController.deleteUser);
+
 router.post(
-  "/upload",
+  "/uploads",
   authenticateToken,
-  upload.single("file"),
+  upload.array("images"),
   userController.uploadFile
 );
 

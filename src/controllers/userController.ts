@@ -1,6 +1,8 @@
 import { Request, RequestHandler, Response } from "express";
 import * as userService from "../services/userService";
 import { User } from "../models/User";
+import { addMultipleImages } from "../services/imagesService";
+import { CustomeFile } from "../models/file";
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -96,13 +98,24 @@ export const deleteUser: RequestHandler<
 
 export const uploadFile = async (req: Request, res: Response) => {
   try {
-    if (!req.file) {
+    if (!req.files) {
       return res.status(400).json({ message: "No file uploaded" });
     }
-    res.status(200).json({
-      message: "File uploaded successfully",
-      filename: req.file.filename,
+
+    const r = await addMultipleImages({
+      files: req.files as CustomeFile[],
+      content_type: req.body.content_type,
+      content_id: Number(req.body.content_id),
     });
+    
+    if (r) {
+      res.status(200).json({
+        message: "File uploaded successfully",
+      });
+    } else
+      res.status(400).json({
+        message: "File uploaded failed",
+      });
   } catch (error) {
     res.status(500).json({ message: "Error uploading file" });
   }

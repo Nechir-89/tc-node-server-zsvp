@@ -4,3 +4,5 @@ dist
 .env
 npm-debug.log
 node-server.zip
+
+/uploads
